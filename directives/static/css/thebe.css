@@ -44,7 +44,7 @@ SOFTWARE.
   background-color: lightgray;
 }
 
-.thebe-status-launching.thebe-info,.thebe-status-building.thebe-info,.thebe-status-built.thebe-info {
+.thebe-status-launching.thebe-info,.thebe-status-building.thebe-info,.thebe-status-built.thebe-info,.thebe-satus-starting.thebe-info {
   background-color: white;
 }
 
@@ -133,13 +133,7 @@ SOFTWARE.
   border-color: #444 !important;
 }
 
-.thebelab-cell {
-  background: none;
-  border: 2px solid #aaa;
-  border-radius: 0 0 5pt 5pt;
-}
-
-.thebe {
+.thebe .highlight > pre {
   background: none;
   border: 2px solid #aaa;
   border-radius: 0 0 5pt 5pt;
@@ -147,6 +141,7 @@ SOFTWARE.
 
 .thebelab-cell .thebelab-input {
     padding-left: 1em;
+    padding-right: 1em;
     margin-bottom: .5em;
     margin-top: .5em;
 }
@@ -154,6 +149,7 @@ SOFTWARE.
 .thebelab-cell .jp-OutputArea {
     margin-top: .5em;
     margin-left: 1em;
+    margin-right: 1em;
 }
 
 button.thebelab-button.thebelab-run-button {
