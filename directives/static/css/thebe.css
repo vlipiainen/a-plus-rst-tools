@@ -24,7 +24,27 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-@import 'new-styling.css';
+.thebe-info {
+  width: 100%;
+  background-color: #eeee00;
+  padding: 20pt;
+  margin-bottom: 5pt;
+  margin-top: 5pt;
+  border-style: solid;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+
+.thebe-status {
+  flex-grow: 1;
+  border: solid;
+}
+
+.thebe-controls {
+  flex-grow: 1;
+  border: solid;
+}
 
 /* Thebelab Buttons */
 .thebe-button-container {

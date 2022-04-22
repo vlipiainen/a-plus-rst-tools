@@ -234,6 +234,7 @@ class ThebeButtonNode(nodes.Element):
         return (
         '<div class="thebe-info">'
             '<div class="thebe-status">'
+                'Status'
             '</div>'
             '<div class="thebe-controls">'
                 f'<button title="{text}" class="thebelab-button thebe-launch-button" onclick="initThebe()">'
