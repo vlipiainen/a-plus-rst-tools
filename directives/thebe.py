@@ -232,13 +232,15 @@ class ThebeButtonNode(nodes.Element):
     def html(self):
         text = self["text"]
         return (
-            '<div class="thebe-container">'
-                '<div class="thebe-button-container">'
-                    f'<button title="{text}" class="thebelab-button thebe-launch-button" onclick="initThebe()">'
-                        f'{text}'
-                    '</button>'
-                '</div>'
+        '<div class="thebe-info">'
+            '<div class="thebe-status">'
             '</div>'
+            '<div class="thebe-controls">'
+                f'<button title="{text}" class="thebelab-button thebe-launch-button" onclick="initThebe()">'
+                f'{text}'
+                '</button>'
+            '</div>'
+        '</div>'
         )
 
 
