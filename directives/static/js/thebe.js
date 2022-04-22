@@ -69,6 +69,10 @@ var initThebe = () => {
         .addClass("thebe-status-" + data.status)
         .find(".loading-text").html("<span class='launch_msg'>Launching interactive code environment: </span><span class='status'>" + data.status + "</span>");
 
+        $(".thebe-info ")
+        .removeClass("thebe-status-" + thebeStatus)
+        .addClass("thebe-status-" + data.status)
+
         // Now update our thebe status
         thebeStatus = data.status;
 

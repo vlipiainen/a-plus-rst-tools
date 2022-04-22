@@ -24,26 +24,54 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+.thebelab-cell {
+  margin-top: 0px !important;
+  border-radius: 0 0 5pt 5pt !important;
+}
+
 .thebe-info {
   width: 100%;
-  background-color: #eeee00;
-  padding: 5pt;
+  padding: 2pt;
   margin-bottom: 0pt;
   margin-top: 5pt;
-  border-style: solid;
+  border: 2px solid #aaa;
+  border-bottom-width: 0px;
+  border-radius: 5pt 5pt 0pt 0pt;
   text-align: center;
   display: flex;
   justify-content: space-between;
 }
 
+.thebe-status-waiting.thebe-info {
+  background-color: lightgray
+}
+
+.thebe-status-launching.thebe-info,.thebe-status-building.thebe-info,.thebe-status-built.thebe-info {
+  background-color: white;
+}
+
+.thebe-status-ready.thebe-info {
+  background-color: lightblue;
+}
+
+.thebe-status-disconnected.thebe-info {
+  background-color: lightcoral;
+}
+
 .thebe-status {
-  padding: 10pt 20pt;
-  border: solid;
+  padding: 4pt 8pt;
 }
 
 .thebe-controls {
-  padding: 10pt 20pt;
-  border: solid;
+  padding: 4pt 8pt;
+}
+
+.thebe-status-ready .thebe-controls, 
+.thebe-status-launching .thebe-controls, 
+.thebe-status-building .thebe-controls, 
+.thebe-status-built .thebe-controls,
+.thebe-status-starting .thebe-controls {
+  visibility: hidden;
 }
 
 
@@ -94,6 +122,12 @@ SOFTWARE.
 /* Thebelab Cell */
 .thebelab-cell pre {
   background: none;
+}
+
+.thebe pre {
+  background: none;
+  border: 2px solid #aaa;
+  border-radius: 0 0 5pt 5pt;
 }
 
 .thebelab-cell .thebelab-input {

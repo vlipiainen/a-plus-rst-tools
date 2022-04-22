@@ -232,7 +232,7 @@ class ThebeButtonNode(nodes.Element):
     def html(self):
         text = self["text"]
         return (
-        '<div class="thebe-info">'
+        '<div class="thebe-info thebe-status-waiting">'
             '<div class="thebe-status">'
                 'Status'
             '</div>'
