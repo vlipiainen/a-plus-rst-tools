@@ -234,7 +234,8 @@ class ThebeButtonNode(nodes.Element):
         return (
         '<div class="thebe-info thebe-status-waiting">'
             '<div class="thebe-status">'
-                'Status'
+                '<div class="thebe-status-icon"> </div>'
+                '<div class="thebe-status-msg">Inactive</div>'
             '</div>'
             '<div class="thebe-controls">'
                 f'<button title="{text}" class="thebelab-button thebe-launch-button" onclick="initThebe()">'

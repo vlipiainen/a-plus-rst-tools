@@ -40,10 +40,8 @@ SOFTWARE.
   text-align: center;
   display: flex;
   justify-content: space-between;
-}
-
-.thebe-status-waiting.thebe-info {
-  background-color: lightgray
+  align-items: center;
+  background-color: lightgray;
 }
 
 .thebe-status-launching.thebe-info,.thebe-status-building.thebe-info,.thebe-status-built.thebe-info {
@@ -60,17 +58,22 @@ SOFTWARE.
 
 .thebe-status {
   padding: 4pt 8pt;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
 }
 
 .thebe-controls {
   padding: 4pt 8pt;
 }
 
-.thebe-status-ready .thebe-controls, 
 .thebe-status-launching .thebe-controls, 
 .thebe-status-building .thebe-controls, 
 .thebe-status-built .thebe-controls,
 .thebe-status-starting .thebe-controls {
+  
+}
+
+.thebe-status-ready .thebe-controls {
   visibility: hidden;
 }
 
@@ -120,11 +123,23 @@ SOFTWARE.
 }
 
 /* Thebelab Cell */
-.thebelab-cell pre {
+.thebelab-cell {
   background: none;
+  border: 2px solid #aaa;
+  border-radius: 0 0 5pt 5pt;
 }
 
-.thebe pre {
+.thebelab-cell:focus-within {
+  border-color: #444 !important;
+}
+
+.thebelab-cell {
+  background: none;
+  border: 2px solid #aaa;
+  border-radius: 0 0 5pt 5pt;
+}
+
+.thebe {
   background: none;
   border: 2px solid #aaa;
   border-radius: 0 0 5pt 5pt;
