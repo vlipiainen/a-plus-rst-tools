@@ -164,7 +164,6 @@ button.thebelab-button.thebelab-run-button {
 /* Loading button */
 button.thebe-launch-button div.spinner {
     float: left;
-    margin-right: 1em;
 }
 
 /* Remove the spinner when thebelab is ready */
