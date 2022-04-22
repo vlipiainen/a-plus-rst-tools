@@ -120,6 +120,9 @@ SOFTWARE.
     height: 2.2em;
     font-size: .8em;
     border: 1px black solid;
+    width: 100pt;
+    display: flex;
+    align-items: center;
 }
 
 /* Thebelab Cell */
@@ -158,9 +161,9 @@ button.thebelab-button.thebelab-run-button {
 }
 
 /* Loading button */
-button.thebe-launch-button div.spinner {
+/* button.thebe-launch-button div.spinner {
     float: left;
-}
+} */
 
 /* Remove the spinner when thebelab is ready */
 .thebe-launch-button.thebe-status-ready .spinner {
