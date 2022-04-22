@@ -70,7 +70,6 @@ var initThebe = () => {
             'starting': 'Launching',
             'ready': 'Active',
             'disconnected': 'Error'
-
         }
 
         $(".thebe-launch-button ")

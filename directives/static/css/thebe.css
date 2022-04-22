@@ -44,7 +44,7 @@ SOFTWARE.
   background-color: lightgray;
 }
 
-.thebe-status-launching.thebe-info,.thebe-status-building.thebe-info,.thebe-status-built.thebe-info,.thebe-satus-starting.thebe-info {
+.thebe-status-launching.thebe-info,.thebe-status-building.thebe-info,.thebe-status-built.thebe-info,.thebe-status-starting.thebe-info {
   background-color: white;
 }
 
@@ -131,7 +131,7 @@ SOFTWARE.
 }
 
 .thebelab-cell:focus-within {
-  border-color: #444 !important;
+  border-color: #777 !important;
 }
 
 .thebe .highlight > pre {
