@@ -27,24 +27,25 @@ SOFTWARE.
 .thebe-info {
   width: 100%;
   background-color: #eeee00;
-  padding: 20pt;
-  margin-bottom: 5pt;
+  padding: 5pt;
+  margin-bottom: 0pt;
   margin-top: 5pt;
   border-style: solid;
   text-align: center;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
 }
 
 .thebe-status {
-  flex-grow: 1;
+  padding: 10pt 20pt;
   border: solid;
 }
 
 .thebe-controls {
-  flex-grow: 1;
+  padding: 10pt 20pt;
   border: solid;
 }
+
 
 /* Thebelab Buttons */
 .thebe-button-container {
