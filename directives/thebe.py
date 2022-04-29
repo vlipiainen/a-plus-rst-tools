@@ -226,7 +226,7 @@ class ThebeButtonNode(nodes.Element):
     is enabled, the node is added at the bottom of the document.
     """
 
-    def __init__(self, rawsource="", *children, text="Run code", **attributes):
+    def __init__(self, rawsource="", *children, text="Activate", **attributes):
         super().__init__("", text=text)
 
     def html(self):
@@ -239,7 +239,7 @@ class ThebeButtonNode(nodes.Element):
             '</div>'
             '<div class="thebe-controls">'
                 f'<button title="Activate" class="thebelab-button thebe-launch-button" onclick="initThebe()">'
-                f'Activate'
+                f'{text}'
                 '</button>'
             '</div>'
         '</div>'
