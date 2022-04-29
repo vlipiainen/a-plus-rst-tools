@@ -55,8 +55,7 @@ var initThebe = () => {
             <div class="rect2"></div>
             <div class="rect3"></div>
             <div class="rect4"></div>
-        </div>
-        <span class="loading-text"></span>`;
+        </div>`;
     })
 
     // Set thebe event hooks
@@ -64,10 +63,26 @@ var initThebe = () => {
     thebelab.on("status", function (evt, data) {
         console.log("Status changed:", data.status, data.message);
 
+        const state_dict = {
+            'launching': 'Launching',
+            'building': 'Launching',
+            'built': 'Launching',
+            'starting': 'Launching',
+            'ready': 'Active',
+            'failed': 'Error'
+        }
+
         $(".thebe-launch-button ")
         .removeClass("thebe-status-" + thebeStatus)
         .addClass("thebe-status-" + data.status)
-        .find(".loading-text").html("<span class='launch_msg'>Launching interactive code environment: </span><span class='status'>" + data.status + "</span>");
+        .find(".loading-text").html("<span class='launch_msg'></span><span class='status'> </span>");
+
+        $(".thebe-status-msg ").html(state_dict[data.status]);
+
+
+        $(".thebe-info ")
+        .removeClass("thebe-status-" + thebeStatus)
+        .addClass("thebe-status-" + data.status)
 
         // Now update our thebe status
         thebeStatus = data.status;

@@ -232,8 +232,17 @@ class ThebeButtonNode(nodes.Element):
     def html(self):
         text = self["text"]
         return (
-            '<div class="thebe-button-container"><button title="{text}" class="thebelab-button thebe-launch-button"'
-            'onclick="initThebe()">{text}</button></div>'.format(text=text)
+        '<div class="thebe-info thebe-status-waiting">'
+            '<div class="thebe-status">'
+                '<div class="thebe-status-icon"> </div>'
+                '<div class="thebe-status-msg">Inactive</div>'
+            '</div>'
+            '<div class="thebe-controls">'
+                f'<button title="Activate" class="thebelab-button thebe-launch-button" onclick="initThebe()">'
+                f'Activate'
+                '</button>'
+            '</div>'
+        '</div>'
         )
 
 
