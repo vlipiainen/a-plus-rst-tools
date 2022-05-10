@@ -64,6 +64,13 @@ var initThebe = () => {
     thebelab.on("status", function (evt, data) {
         console.log("Status changed:", data.status, data.message);
 
+        var intervalId;
+        if (data.status == "ready") {
+            intervalId = intervalId
+            ? connectionChecker(intervalId)
+            : connectionChecker(0)
+        }
+
         // A nicer interface for the state of launch process
         const state_dict = {
             'launching': 'Launching',
@@ -71,7 +78,8 @@ var initThebe = () => {
             'built': 'Launching',
             'starting': 'Launching',
             'ready': 'Active',
-            'failed': 'Error'
+            'failed': 'Error',
+            'disconnected': 'Disconnected, wait or try refreshing the page'
         }
 
         // Change status of topmost container
@@ -143,4 +151,48 @@ var detectLanguage = (language) => {
         language = "text/x-octave";
     }
     return language;
+}
+
+const connectionChecker = (previousInterval) => {
+    const time_to_failure_ms = 10000
+    const check_interval_ms = 30000
+
+    if (previousInterval) clearInterval(previousInterval)
+
+    console.log("Entering connectionChecker")
+
+    const timer = () => (
+        new Promise((res) => {
+            setTimeout(() => res(false), time_to_failure_ms)
+        })
+    )
+
+    const ack = () => (
+        window.thebeKernel
+        .requestKernelInfo()
+        .then(() => true)
+        .catch(() => false)
+    )
+
+    const timeOutCheck = () => Promise.race([timer(), ack()])
+
+    intervalId = window.setInterval( () => {
+        timeOutCheck().then((connected) => {
+            if (!connected) {
+            console.log(`Kernel disconnected (${connected})`)
+            thebelab.events.trigger('status', { 
+                status: "disconnected",
+                message: "Kernel not responding"
+            }) } else console.log(`Kernel is connected`)
+        })
+    },
+    check_interval_ms
+    )
+}
+
+if(window.status == "disconnected") {
+    thebelab.events.trigger('status', { 
+        status: "ready",
+        message: "Kernel reconnected after disconnect"
+    }) 
 }
