@@ -226,23 +226,14 @@ class ThebeButtonNode(nodes.Element):
     is enabled, the node is added at the bottom of the document.
     """
 
-    def __init__(self, rawsource="", *children, text="Activate", **attributes):
+    def __init__(self, rawsource="", *children, text="Run code", **attributes):
         super().__init__("", text=text)
 
     def html(self):
         text = self["text"]
         return (
-        '<div class="thebe-info thebe-status-waiting">'
-            '<div class="thebe-status">'
-                '<div class="thebe-status-icon"> </div>'
-                '<div class="thebe-status-msg">Inactive</div>'
-            '</div>'
-            '<div class="thebe-controls">'
-                f'<button title="Activate" class="thebelab-button thebe-launch-button" onclick="initThebe()">'
-                f'{text}'
-                '</button>'
-            '</div>'
-        '</div>'
+            '<div class="thebe-button-container"><button title="{text}" class="thebelab-button thebe-launch-button"'
+            'onclick="initThebe()">{text}</button></div>'.format(text=text)
         )
 
 
@@ -266,6 +257,57 @@ class ThebeButton(Directive):
     def run(self):
         kwargs = {"text": self.arguments[0]} if self.arguments else {}
         return [ThebeButtonNode(**kwargs)]
+
+
+class ThebeBoxButtonNode(nodes.Element):
+    """Appended to the doctree by the ThebeButton directive
+
+    Renders as a button to enable thebe on the page.
+
+    If no ThebeButton directive is found in the document but thebe
+    is enabled, the node is added at the bottom of the document.
+    """
+
+    def __init__(self, rawsource="", *children, text="Activate", **attributes):
+        super().__init__("", text=text)
+
+    def html(self):
+        text = self["text"]
+        return (
+        '<div class="thebe-info thebe-status-waiting">'
+            '<div class="thebe-status">'
+                '<div class="thebe-status-icon"> </div>'
+                '<div class="thebe-status-msg">Inactive</div>'
+            '</div>'
+            '<div class="thebe-controls">'
+                f'<button title="Activate" class="thebelab-button thebe-launch-button" onclick="initThebe()">'
+                f'{text}'
+                '</button>'
+            '</div>'
+        '</div>'
+        )
+
+
+class ThebeBoxButton(Directive):
+    """Specify a button to activate thebe on the page
+
+    Arguments
+    ---------
+    text : str (optional)
+        If provided, the button text to display
+
+    Content
+    -------
+    None
+    """
+
+    optional_arguments = 1
+    final_argument_whitespace = True
+    has_content = False
+
+    def run(self):
+        kwargs = {"text": self.arguments[0]} if self.arguments else {}
+        return [ThebeBoxButtonNode(**kwargs)]
 
 
 # Used to render an element node as HTML
@@ -295,6 +337,7 @@ def setup(app):
     app.add_config_value("thebe_config", {}, "html")
     # override=True in case Jupyter Sphinx has already been loaded
     app.add_directive("thebe-button", ThebeButton, override=True)
+    app.add_directive("thebe-box-button", ThebeBoxButton, override=True)
 
     # Add relevant code to headers
     opts = {'data-aplus': 'yes'}
@@ -325,6 +368,17 @@ def setup(app):
         man=(skip, None),
         override=True,
     )
+
+    app.add_node(
+        ThebeBoxButtonNode,
+        html=(visit_element_html, None),
+        latex=(skip, None),
+        textinfo=(skip, None),
+        text=(skip, None),
+        man=(skip, None),
+        override=True,
+    )
+
 
     return {
         "version": __version__,
