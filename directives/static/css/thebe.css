@@ -24,27 +24,31 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-.thebelab-cell {
-  margin-top: 0px !important;
-  border-radius: 0 0 5pt 5pt !important;
-}
-
+/* || COMMON STYLES FOR LAUNCH-BUTTON INTERFACE */
 .thebe-info {
   width: 100%;
-  padding: 2pt;
-  margin-bottom: 0pt;
+  margin-bottom: 5pt;
   margin-top: 5pt;
-  border: 2px solid #aaa;
-  border-bottom-width: 0px;
-  border-radius: 5pt 5pt 0pt 0pt;
-  text-align: center;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  background-color: #dff0d8;
+  border-style: solid;
+  border-color: #aaa;
+  border-radius: 5pt;
+}
+
+.thebelab-button.thebe-launch-button {
+  height: 2.2em;
+  font-size: .8em;
+  border: 1px black solid;
+}
+
+.thebe-status-waiting.thebe-info {
   background-color: lightgray;
 }
 
-.thebe-status-launching.thebe-info,.thebe-status-building.thebe-info,.thebe-status-built.thebe-info,.thebe-status-starting.thebe-info {
+.thebe-status-launching.thebe-info,
+.thebe-status-building.thebe-info,
+.thebe-status-built.thebe-info,
+.thebe-status-starting.thebe-info {
   background-color: white;
 }
 
@@ -56,88 +60,100 @@ SOFTWARE.
   background-color: lightcoral;
 }
 
+.thebe-launch-button span.status {
+  font-family: monospace;
+  font-weight: bold;
+}
+
+.thebe-status-ready .thebe-launch-button span.status {
+  color: green;
+}
+
+.thebe-standalone-button-container button.thebe-launch-button div.spinner {
+  float: left;
+  margin-right: 1em;
+}
+
+.thebe-status-ready .thebe-launch-button .spinner {
+  display: none;
+}
+
+/* Loading spinner definition is at the end of this file */
+
+/* || STANDALONE BUTTONS */
+.thebe-info.thebe-standalone-button-container {
+  text-align: center;
+  display: block;
+  padding: 20pt;
+}
+
+
+/* || BUTTONS NEXT TO CODE BLOCK  */
+/* to make it fit in with code cell. */
+
+.thebe-info.thebe-precell-button-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0;
+  border: 2px solid #aaa;
+  border-bottom-width: 0px;
+  border-radius: 5pt 5pt 0pt 0pt;
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .thebe-status {
-  padding: 4pt 8pt;
+  padding: 5pt 10pt;
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
 }
 
 .thebe-controls {
-  padding: 4pt 8pt;
-}
-
-.thebe-status-launching .thebe-controls, 
-.thebe-status-building .thebe-controls, 
-.thebe-status-built .thebe-controls,
-.thebe-status-starting .thebe-controls {
-  
+  padding: 5pt 10pt;
 }
 
 .thebe-status-ready .thebe-controls {
   display: none;
 }
 
+/* || ALL THEBE BUTTONS */
+.thebelab-button {
+  z-index: 999;
+  display: inline-block;
+  padding: 0.35em 1.2em;
+  margin: 0px 1px;
+  border-radius: 0.12em;
+  box-sizing:  border-box;
+  text-decoration: none;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  text-align: center;
+  transition: all 0.2s;
+  background-color: #dddddd;
+  border: 0.05em solid white;
+  color: #000000;
+}
 
-/* Thebelab Buttons */
-.thebe-button-container {
-  width: 100%;
-  padding: 20pt;
-  margin-bottom: 5pt;
-  margin-top: 5pt;
-  background-color: #dff0d8;
-  border-style: solid;
-  border-color: #3a6727;
-  text-align: center
+.thebelab-button:hover{
+  border: 0.05em solid black;
+  background-color: #fcfcfc;
 }
 
 .thebe-button-container button {
   background-color: white
 }
 
-.thebelab-button {
-    z-index: 999;
-    display: inline-block;
-    padding: 0.35em 1.2em;
-    margin: 0px 1px;
-    border-radius: 0.12em;
-    box-sizing:  border-box;
-    text-decoration: none;
-    font-family: 'Roboto', sans-serif;
-    font-weight: 300;
-    text-align: center;
-    transition: all 0.2s;
-    background-color: #dddddd;
-    border: 0.05em solid white;
-    color: #000000;
-}
+/* || CODE CELLS */
 
-.thebelab-button:hover{
-    border: 0.05em solid black;
-    background-color: #fcfcfc;
-}
-
-.thebe-launch-button {
-    height: 2.2em;
-    font-size: .8em;
-    border: 1px black solid;
-    width: 100pt;
-}
-
-/* Thebelab Cell */
 .thebelab-cell {
   background: none;
   border: 2px solid #aaa;
-  border-radius: 0 0 5pt 5pt;
+  border-radius: 5pt;
 }
-
 .thebelab-cell:focus-within {
   border-color: #777 !important;
-}
-
-.thebe .highlight > pre {
-  background: none;
-  border: 2px solid #aaa;
-  border-radius: 0 0 5pt 5pt;
 }
 
 .thebelab-cell .thebelab-input {
@@ -154,28 +170,26 @@ SOFTWARE.
 }
 
 button.thebelab-button.thebelab-run-button {
-    margin-left: 1.5em;
-    margin-bottom: .5em;
+  margin-left: 1.5em;
+  margin-bottom: .5em;
 }
 
-/* Loading button */
-/* button.thebe-launch-button div.spinner {
-    float: left;
-} */
+/* || CODE BLOCKS NEXT TO BUTTON  */
+/* to make them fit in with button */
 
-/* Remove the spinner when thebelab is ready */
-.thebe-launch-button.thebe-status-ready .spinner {
-    display: none;
+.thebe-precell-button-container + .thebe .thebelab-cell {
+  margin-top: 0px;
+  border-radius: 0 0 5pt 5pt;
 }
 
-.thebe-launch-button span.status {
-    font-family: monospace;
-    font-weight: bold;
+.thebe-precell-button-container + .thebe .highlight > pre {
+  margin-top: 0px;
+  background: none;
+  border: 2px solid #aaa;
+  border-radius: 0 0 5pt 5pt;
 }
 
-.thebe-launch-button.thebe-status-ready span.status {
-    color: green;
-}
+/* || LOADING SPINNER */
 
 .spinner {
     height: 2em;

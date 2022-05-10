@@ -232,7 +232,7 @@ class ThebeButtonNode(nodes.Element):
     def html(self):
         text = self["text"]
         return (
-            '<div class="thebe-button-container"><button title="{text}" class="thebelab-button thebe-launch-button"'
+            '<div class="thebe-info thebe-standalone-button-container thebe-status-waiting"><button title="{text}" class="thebelab-button thebe-launch-button"'
             'onclick="initThebe()">{text}</button></div>'.format(text=text)
         )
 
@@ -259,13 +259,10 @@ class ThebeButton(Directive):
         return [ThebeButtonNode(**kwargs)]
 
 
-class ThebeBoxButtonNode(nodes.Element):
+class ThebePrecellButtonNode(nodes.Element):
     """Appended to the doctree by the ThebeButton directive
 
-    Renders as a button to enable thebe on the page.
-
-    If no ThebeButton directive is found in the document but thebe
-    is enabled, the node is added at the bottom of the document.
+    Renders a nice looking activation button when placed before code cell
     """
 
     def __init__(self, rawsource="", *children, text="Activate", **attributes):
@@ -274,7 +271,7 @@ class ThebeBoxButtonNode(nodes.Element):
     def html(self):
         text = self["text"]
         return (
-        '<div class="thebe-info thebe-status-waiting">'
+        '<div class="thebe-info thebe-precell-button-container thebe-status-waiting">'
             '<div class="thebe-status">'
                 '<div class="thebe-status-icon"> </div>'
                 '<div class="thebe-status-msg">Inactive</div>'
@@ -288,8 +285,8 @@ class ThebeBoxButtonNode(nodes.Element):
         )
 
 
-class ThebeBoxButton(Directive):
-    """Specify a button to activate thebe on the page
+class ThebePrecellButton(Directive):
+    """Specify a thebe activation button that looks nice just before a code cell
 
     Arguments
     ---------
@@ -307,7 +304,7 @@ class ThebeBoxButton(Directive):
 
     def run(self):
         kwargs = {"text": self.arguments[0]} if self.arguments else {}
-        return [ThebeBoxButtonNode(**kwargs)]
+        return [ThebePrecellButtonNode(**kwargs)]
 
 
 # Used to render an element node as HTML
@@ -337,7 +334,7 @@ def setup(app):
     app.add_config_value("thebe_config", {}, "html")
     # override=True in case Jupyter Sphinx has already been loaded
     app.add_directive("thebe-button", ThebeButton, override=True)
-    app.add_directive("thebe-box-button", ThebeBoxButton, override=True)
+    app.add_directive("thebe-precell-button", ThebePrecellButton, override=True)
 
     # Add relevant code to headers
     opts = {'data-aplus': 'yes'}
@@ -370,7 +367,7 @@ def setup(app):
     )
 
     app.add_node(
-        ThebeBoxButtonNode,
+        ThebePrecellButtonNode,
         html=(visit_element_html, None),
         latex=(skip, None),
         textinfo=(skip, None),
