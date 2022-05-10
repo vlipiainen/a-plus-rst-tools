@@ -160,7 +160,7 @@ def update_thebe_context(app, doctree, docname):
     )
     branch = config_thebe.get("repository_branch", "master")
     path_to_docs = config_thebe.get("path_to_docs", ".").strip("/") + "/"
-    org, repo = _split_repo_url(repo_url)
+    org, repo, provider = _split_repo_url(repo_url)
 
     codemirror_theme = config_thebe.get("codemirror-theme", "eclipse")
     codemirror_indent_unit = 4
@@ -194,6 +194,7 @@ def update_thebe_context(app, doctree, docname):
             binderUrl: "{binder_url}",
             repo: "{org}/{repo}",
             ref: "{branch}",
+            repoProvider: "{provider}"
         }},
         codeMirrorconfig: {{
             theme: '{codemirror_theme}',
@@ -224,15 +225,17 @@ def _split_repo_url(url):
     """Split a repository URL into an org / repo combination."""
     if "github.com/" in url:
         end = url.split("github.com/")[-1]
+        provider = "github"
         org, repo = end.split("/")[:2]
-    elif "version.aalto.fi/" in url:
-        end = url.split("github.com/")[-1]
+    elif "version.aalto.fi/gitlab/" in url:
+        end = url.split("version.aalto.fi/gitlab/")[-1]
+        provider = "gitlab"
         org, repo = end.split("/")[:2]
     else:
         logger.warning(
             f"Currently Thebe repositories must be on GitHub or Aalto gitlab, got {url}")
         org = repo = None
-    return org, repo
+    return org, repo, provider
 
 
 class ThebeButtonNode(nodes.Element):
