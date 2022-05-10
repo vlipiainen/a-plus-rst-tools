@@ -139,6 +139,8 @@ var detectLanguage = (language) => {
         language = "text/x-c++src";
     } else if (language.indexOf('c') > -1) {
         language = "text/x-csrc";
+    } else if (language.indexOf('octave')) {
+        language = "text/x-octave";
     }
     return language;
 }
