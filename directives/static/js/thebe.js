@@ -61,15 +61,14 @@ var initThebe = () => {
 
     // Set thebe event hooks
     var thebeStatus;
+    var intervalId;
     thebelab.on("status", function (evt, data) {
         console.log("Status changed:", data.status, data.message);
 
-        var intervalId;
-        if (data.status == "ready") {
-            intervalId = intervalId
-            ? connectionChecker(intervalId)
-            : connectionChecker(0)
-        }
+        console.log(data.status)
+
+        if (data.status == "ready") intervalId = connectionChecker(intervalId || 0, true)
+        if (data.status == "disconnected") intervalId = connectionChecker(intervalId || 0, false)
 
         // A nicer interface for the state of launch process
         const state_dict = {
@@ -153,10 +152,9 @@ var detectLanguage = (language) => {
     return language;
 }
 
-const connectionChecker = (previousInterval) => {
-    const time_to_failure_ms = 10000
-    const check_interval_ms = 30000
-
+const connectionChecker = (previousInterval, previouslyConnected) => {
+    const time_to_failure_ms = 1000 // todo: for debugging
+    const check_interval_ms = 3000 // todo for debugging
     if (previousInterval) clearInterval(previousInterval)
 
     console.log("Entering connectionChecker")
@@ -178,12 +176,18 @@ const connectionChecker = (previousInterval) => {
 
     intervalId = window.setInterval( () => {
         timeOutCheck().then((connected) => {
-            if (!connected) {
+            if (!connected && previouslyConnected) {
             console.log(`Kernel disconnected (${connected})`)
             thebelab.events.trigger('status', { 
                 status: "disconnected",
                 message: "Kernel not responding"
-            }) } else console.log(`Kernel is connected`)
+            }) } else if (connected && !previouslyConnected) {
+                console.log(`Kernel reconnected`)
+                thebelab.events.trigger('status', { 
+                    status: "ready",
+                    message: "Kernel reconnnected"
+                })
+            }
         })
     },
     check_interval_ms
