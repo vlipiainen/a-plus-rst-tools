@@ -70,6 +70,8 @@ var initThebe = () => {
         if (data.status == "ready") intervalId = connectionChecker(intervalId || 0, true)
         if (data.status == "disconnected") intervalId = connectionChecker(intervalId || 0, false)
 
+        data.log(intervalId)
+
         // A nicer interface for the state of launch process
         const state_dict = {
             'launching': 'Launching',
@@ -157,7 +159,7 @@ const connectionChecker = (previousInterval, previouslyConnected) => {
     const check_interval_ms = 3000 // todo for debugging
     if (previousInterval) clearInterval(previousInterval)
 
-    console.log("Entering connectionChecker")
+    console.log("Entering connectionChecker", previousInterval, previouslyConnected)
 
     const timer = () => (
         new Promise((res) => {
@@ -175,9 +177,9 @@ const connectionChecker = (previousInterval, previouslyConnected) => {
     const timeOutCheck = () => Promise.race([timer(), ack()])
 
     intervalId = window.setInterval( () => {
-        timeOutCheck().then((connected) => {
+        timeOutCheck().then((connected, previouslyConnected) => {
             if (!connected && previouslyConnected) {
-            console.log(`Kernel disconnected (${connected})`)
+            console.log(`Kernel disconnected`)
             thebelab.events.trigger('status', { 
                 status: "disconnected",
                 message: "Kernel not responding"
