@@ -281,7 +281,7 @@ class ThebeButton(Directive):
 
 
 class ThebePrecellButtonNode(nodes.Element):
-    """Appended to the doctree by the ThebeButton directive
+    """Appended to the doctree by the ThebePrecellButton directive.
 
     Renders a nice looking activation button when placed before code cell
     """

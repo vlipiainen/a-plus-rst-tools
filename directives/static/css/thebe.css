@@ -36,7 +36,6 @@ SOFTWARE.
 }
 
 .thebelab-button.thebe-launch-button {
-  height: 2.2em;
   font-size: .8em;
   border: 1px black solid;
 }
@@ -95,7 +94,6 @@ SOFTWARE.
   border-bottom-width: 0px;
   border-radius: 5pt 5pt 0pt 0pt;
   text-align: center;
-  display: flex;
   justify-content: space-between;
   align-items: center;
 }
