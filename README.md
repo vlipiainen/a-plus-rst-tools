@@ -1280,8 +1280,8 @@ interactive code blocks.
    # Thebe configuration
     thebe_config = {
       "binderUrl": "https://mybinder.org" # For testing
-      # "repository_url": "", # The repository to base environment on, defaults to https://github.com/binder-examples/jupyter-stacks-datascience
-      # "repository_branch": "", # The branch to use from repo, defaults to master
+      # "repository_url": "",
+      # "repository_branch": "",
       "selector": "div.highlight",
       "codemirror-config": {
           "theme": "eclipse",
