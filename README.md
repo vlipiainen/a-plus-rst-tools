@@ -1279,9 +1279,9 @@ interactive code blocks.
 
    # Thebe configuration
     thebe_config = {
-      "binderUrl": "https://mybinder.org" # For testing; replace this with a binderhub server provided by your instution for production
-      # "repository_url": "",
-      # "repostiory_branch": "",
+      "binderUrl": "https://mybinder.org" # For testing
+      # "repository_url": "", # The repository to base environment on, defaults to https://github.com/binder-examples/jupyter-stacks-datascience
+      # "repository_branch": "", # The branch to use from repo, defaults to master
       "selector": "div.highlight",
       "codemirror-config": {
           "theme": "eclipse",
@@ -1292,9 +1292,13 @@ interactive code blocks.
       }
     }
 ```
-The kernel configuration fields, which configure a production binderhub server that
-can run the environment residing in a remote repository, are followed by
-`"selector"` configuration. The last configuration ultimately defines which `rst`
+The first three settings configure the kernel
+- `"binderUrl"`. A url to a BinderHub server. `mybinder.org` should only be used for testing, and should be replaced by a binderhub server provided by your instution when running a course. (__For Aalto Users:__ you can use the BinderHub server at `binder4.org.aalto.fi`)
+- `"repository_url"`. A valid [binderhub repository](https://mybinder.readthedocs.io/en/latest/examples/sample_repos.html) to base the code environment on. Defaults to [`jupyter-stacks-datascience`](https://github.com/binder-examples/jupyter-stacks-datascience). (__For Aalto users:__ if you want to this repository to be private, please contact aplusguru@cs.aalto.fi and ask for a version.aalto.fi gitlab repository in the group binderhub-code).
+- `"repository_branch"`. The branch to use from the repository above. Defaults to master.
+
+The kernel configuration options are followed by
+- `"selector"` configuration. The last configuration ultimately defines which `rst`
 code blocks should be converted to interactive code elements. If this configuration is
 - `"selector": "div.highlight"` all the code blocks in `rst` files starting or
 containing `:thebe-kernel: <KERNEL-NAME-HERE>` directive will be converted to
