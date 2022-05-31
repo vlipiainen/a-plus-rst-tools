@@ -1279,9 +1279,9 @@ interactive code blocks.
 
    # Thebe configuration
     thebe_config = {
-      "binderUrl": "https://mybinder.org" # For testing
-      # "repository_url": "",
-      # "repository_branch": "",
+      "binderUrl": "https://mybinder.org" # For testing only
+      # "repository_url": "https://github.com/binder-examples/jupyter-stacks-datascience",
+      # "repository_branch": "master",
       "selector": "div.highlight",
       "codemirror-config": {
           "theme": "eclipse",
@@ -1293,8 +1293,8 @@ interactive code blocks.
     }
 ```
 The first three settings configure the kernel
-- `"binderUrl"`. A url to a BinderHub server. `mybinder.org` should only be used for testing, and should be replaced by a binderhub server provided by your instution when running a course. (__For Aalto Users:__ you can use the BinderHub server at `binder4.org.aalto.fi`)
-- `"repository_url"`. A valid [binderhub repository](https://mybinder.readthedocs.io/en/latest/examples/sample_repos.html) to base the code environment on. Defaults to [`jupyter-stacks-datascience`](https://github.com/binder-examples/jupyter-stacks-datascience). (__For Aalto users:__ if you want to this repository to be private, please contact aplusguru@cs.aalto.fi and ask for a version.aalto.fi gitlab repository in the group binderhub-code).
+- `"binderUrl"`. A url to a BinderHub server. `mybinder.org` should only be used for testing, and should be replaced by a binderhub server provided by your instution when running a course. (_For Aalto Users:_ you can use the BinderHub server at `binder4.org.aalto.fi`)
+- `"repository_url"`. A valid [binderhub repository](https://mybinder.readthedocs.io/en/latest/examples/sample_repos.html) to base the code environment on. Should be a public GitHub repostiory. Defaults to [`jupyter-stacks-datascience`](https://github.com/binder-examples/jupyter-stacks-datascience). (_For Aalto users:_ if you want to this repository to be private, please contact aplusguru@cs.aalto.fi and ask for a version.aalto.fi gitlab repository in the group binderhub-code).
 - `"repository_branch"`. The branch to use from the repository above. Defaults to master.
 
 The kernel configuration options are followed by
@@ -1328,7 +1328,6 @@ default configuration is `"true"`, and should be set to `"false"` if you prefer
 to use spaces for indentation. A tab has `4` characters width.
 5. `"indentUnit": 4` configuration sets how many spaces define an indented block.
 The default is `4` spaces, and should be explicitly configured to change the indentation experience.
-
 - In addition to these, the matching braces are highlighted when one of
 (`}`, `)` or `]`) is typed.
 
