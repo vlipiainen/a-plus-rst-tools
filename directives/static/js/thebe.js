@@ -61,8 +61,12 @@ var initThebe = () => {
 
     // Set thebe event hooks
     var thebeStatus;
+    var intervalId;
     thebelab.on("status", function (evt, data) {
         console.log("Status changed:", data.status, data.message);
+
+        if (data.status == "ready") intervalId = connectionChecker(intervalId || 0, true)
+        if (data.status == "disconnected") intervalId = connectionChecker(intervalId || 0, false)
 
         // A nicer interface for the state of launch process
         const state_dict = {
@@ -71,7 +75,8 @@ var initThebe = () => {
             'built': 'Launching',
             'starting': 'Launching',
             'ready': 'Active',
-            'failed': 'Error'
+            'failed': 'Error',
+            'disconnected': 'Disconnected, wait or try refreshing the page'
         }
 
         // Change status of topmost container
@@ -143,4 +148,48 @@ var detectLanguage = (language) => {
         language = "text/x-octave";
     }
     return language;
+}
+
+const connectionChecker = (previousInterval, previouslyConnected) => {
+    const time_to_failure_ms = 2000 
+    const check_interval_ms = 10000
+    if (previousInterval) clearInterval(previousInterval)
+
+    const timer = () => (
+        new Promise((res) => {
+            setTimeout(() => res(false), time_to_failure_ms)
+        })
+    )
+
+    const ack = () => (
+        window.thebeKernel
+        .requestKernelInfo()
+        .then(() => true)
+        .catch(() => false)
+    )
+
+    const timeOutCheck = () => Promise.race([timer(), ack()])
+
+    intervalId = window.setInterval( (previouslyConnected) => {
+        timeOutCheck().then((connected) => {
+            console.log("Previously connected: ", previouslyConnected)
+            if (!connected && previouslyConnected) {
+            console.log(`Kernel disconnected`)
+            thebelab.events.trigger('status', { 
+                status: "disconnected",
+                message: "Kernel not responding"
+            }) } else if (connected && !previouslyConnected) {
+                console.log(`Kernel reconnected`)
+                thebelab.events.trigger('status', { 
+                    status: "ready",
+                    message: "Kernel reconnnected after disconnect"
+                })
+            }
+        })
+    },
+    check_interval_ms,
+    previouslyConnected
+    )
+
+    return intervalId
 }
