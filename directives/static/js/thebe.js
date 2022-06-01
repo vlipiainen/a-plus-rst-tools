@@ -74,8 +74,9 @@ var initThebe = () => {
             'building': 'Launching',
             'built': 'Launching',
             'starting': 'Launching',
+            'pushing': 'Launching',
             'ready': 'Active',
-            'failed': 'Error',
+            'failed': 'Error, try refreshing the page or contact course staff',
             'disconnected': 'Disconnected, wait or try refreshing the page'
         }
 
