@@ -60,7 +60,7 @@ var initThebe = () => {
     })
 
     // Set thebe event hooks
-    var thebeStatus;
+    var thebeStatus = 'waiting';
     var intervalId;
     thebelab.on("status", function (evt, data) {
         console.log("Status changed:", data.status, data.message);

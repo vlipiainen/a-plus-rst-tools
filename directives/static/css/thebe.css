@@ -64,6 +64,14 @@ SOFTWARE.
   font-weight: bold;
 }
 
+.thebe-launch-button {
+  pointer-events: none;
+}
+
+.thebe-status-waiting .thebe-launch-button {
+  pointer-events: auto;
+}
+
 .thebe-standalone-button-container button.thebe-launch-button div.spinner {
   float: left;
   margin-right: 1em;
@@ -130,6 +138,8 @@ SOFTWARE.
   border: 0.05em solid white;
   color: #000000;
 }
+
+.thebelab-button
 
 .thebelab-button:hover {
   border: 0.05em solid black;
