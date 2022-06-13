@@ -173,7 +173,6 @@ const connectionChecker = (previousInterval, previouslyConnected) => {
 
     intervalId = window.setInterval( (previouslyConnected) => {
         timeOutCheck().then((connected) => {
-            console.log("Previously connected: ", previouslyConnected)
             if (!connected && previouslyConnected) {
             console.log(`Kernel disconnected`)
             thebelab.events.trigger('status', { 
