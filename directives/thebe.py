@@ -84,7 +84,7 @@ def init_thebe_core(app, env):
     opts = {"async": "async", "data-aplus": "yes"}
     css_opts = {"data-aplus": "yes"}
     app.add_js_file(
-        filename="https://unpkg.com/thebelab@latest/lib/index.js", **opts)
+        filename="https://unpkg.com/thebe@0.8.2/lib/index.js", **opts)
     app.add_js_file(
         filename="https://codemirror.net/lib/codemirror.js")
     app.add_js_file(
