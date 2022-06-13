@@ -65,6 +65,7 @@ var initThebe = () => {
     thebelab.on("status", function (evt, data) {
         console.log("Status changed:", data.status, data.message);
 
+        // Start a setInterval function to monitor connections, and cancel the previous one
         if (data.status == "ready") intervalId = connectionChecker(intervalId || 0, true)
         if (data.status == "disconnected") intervalId = connectionChecker(intervalId || 0, false)
 
@@ -151,9 +152,13 @@ var detectLanguage = (language) => {
     return language;
 }
 
+
+// A function to check whether a kernel is still connected
+// A native solution would be better, but I didn't see one
 const connectionChecker = (previousInterval, previouslyConnected) => {
     const time_to_failure_ms = 2000 
     const check_interval_ms = 10000
+
     if (previousInterval) clearInterval(previousInterval)
 
     const timer = () => (
@@ -162,6 +167,7 @@ const connectionChecker = (previousInterval, previouslyConnected) => {
         })
     )
 
+    // Promise that checks whether kernel returns info
     const ack = () => (
         window.thebeKernel
         .requestKernelInfo()
